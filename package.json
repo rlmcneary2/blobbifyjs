@@ -8,6 +8,10 @@
     "docs": "jsdoc . -c jsdoc.json -d docs -p -r",
     "test": "mocha ./test/blobbify -R progress"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlmcneary2/blobbifyjs.git"
+  },
   "keywords": [
     "javascript",
     "Blob"
