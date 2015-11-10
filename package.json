@@ -1,0 +1,24 @@
+{
+  "name": "blobbifyjs",
+  "version": "0.0.1",
+  "description": "Manipulate javascript Blobs.",
+  "main": "./src/index.js",
+  "scripts": {
+    "predocs": "rm -rf ./docs",
+    "docs": "jsdoc . -c jsdoc.json -d docs -p -r",
+    "test": "mocha ./test/blobbify -R progress"
+  },
+  "keywords": [
+    "javascript",
+    "Blob"
+  ],
+  "author": "Richard L. McNeary II",
+  "license": "LGPL-3.0",
+  "devDependencies": {
+    "atob": "^1.1.2",
+    "chai": "^3.4.1",
+    "jsdoc": "^3.3.3",
+    "mocha": "^2.3.3",
+    "rimraf": "^2.4.3"
+  }
+}
