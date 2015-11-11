@@ -4,9 +4,7 @@ An npm package for working with web browser Blobs.
 ## install
 Add the github path to your package.json file (maybe this will change to normal npm installation):
 ```
-"dependencies": {
-    "blobbifyjs": "git+https://github.com/rlmcneary2/blobbifyjs.git"
-  }
+npm install --save git+https://github.com/rlmcneary2/blobbifyjs.git
 ```
 
 ## usage
