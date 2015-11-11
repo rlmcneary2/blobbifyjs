@@ -36,6 +36,7 @@ function Blobbify() {
  * Add a Base64 encoded string to the Blob contents with a specific index. The Blob will be created with contents in the order of the provided indices. If an 'append' function is invoked after this the appended chunk will have an index corresponding to the last thing that is appended.
  * @param {number} index A zero-based index that will be used to sort the items that make up the contents of the Blob before it is created. 
  * @param {string} str A Base64 encoded string of data.
+ * @returns {module:blobbifyjs~Blobbify} The Blobbify instance for chaining.
  */
 Blobbify.prototype.addBase64String = function (index, str) {
     var exists = this._chunks.filter(function(item){
@@ -48,24 +49,51 @@ Blobbify.prototype.addBase64String = function (index, str) {
     var arrays = base64StringToUintArrays(this, str);
     var chunk = combineArrays(arrays);
     addChunk(this, index, chunk);
+    
+    return this;
 };
 
 /**
- * Append a Base64 encoded string to the Blob contents. The Blob will be created with contents in the order that the string was appended. 
+ * Add a Blob to the output Blob contents with a specific index. The Blob will be created with contents in the order of the provided indices. If an 'append' function is invoked after this the appended chunk will have an index corresponding to the last thing that is appended.
+ * @param {number} index A zero-based index that will be used to sort the items that make up the contents of the Blob before it is created. 
+ * @param {Blob} blob A Blob instance.
+ * @returns {module:blobbifyjs~Blobbify} The Blobbify instance for chaining.
+ */
+Blobbify.prototype.addBlob = function (index, blob) {
+    var exists = this._chunks.filter(function(item){
+       item.index = index; 
+    });
+    if (0 < exists.length){
+        throw 'The provided index already exists in the items that will make up the contents of the Blob.';
+    }
+
+    addChunk(this, index, blob);
+    
+    return this;
+};
+
+/**
+ * Append a Base64 encoded string to the Blob contents. The Blob will be created with contents in the order they were appended. 
  * @param {string} str A Base64 encoded string of data.
+ * @returns {module:blobbifyjs~Blobbify} The Blobbify instance for chaining.
  */
 Blobbify.prototype.appendBase64String = function (str) {
     var arrays = base64StringToUintArrays(this, str);
     var chunk = combineArrays(arrays);
     appendChunk(this, chunk);
+    
+    return this;
 };
 
 /**
- * Append a Base64 encoded string to the Blob contents. The Blob will be created with contents in the order that the string was appended. 
- * @param {string} blob A Blob instance.
+ * Append a Blob to the output Blob contents. The output Blob will be created with contents in the order they were appended. 
+ * @param {Blob} blob A Blob instance.
+ * @returns {module:blobbifyjs~Blobbify} The Blobbify instance for chaining.
  */
 Blobbify.prototype.appendBlob = function (blob) {
     appendChunk(this, blob);
+    
+    return this;
 };
 
 /**
