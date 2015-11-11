@@ -123,22 +123,17 @@ function base64StringToUintArrays(blobby, str) {
 }
 
 function combineArrays(arrays) {
-    // If we have a newer browser we can use Array.from(), otherwise iterate (not going to polyfill).
     var combined = null;
-    if (Array.from) {
-        combined = Array.from(arrays);
-    } else {
-        var length = 0;
-        arrays.forEach(function (item) {
-            length += item.length;
-        });
-        combined = new Uint8Array(length);
-        var combinedI = 0;
-        for (var arrayI = 0; arrayI < arrays.length; arrayI++) {
-            for (var i = 0; i < arrays[arrayI].length; i++) {
-                combined[combinedI] = arrays[arrayI][i];
-                combinedI++;
-            }
+    var length = 0;
+    arrays.forEach(function (item) {
+        length += item.length;
+    });
+    combined = new Uint8Array(length);
+    var combinedI = 0;
+    for (var arrayI = 0; arrayI < arrays.length; arrayI++) {
+        for (var i = 0; i < arrays[arrayI].length; i++) {
+            combined[combinedI] = arrays[arrayI][i];
+            combinedI++;
         }
     }
 
