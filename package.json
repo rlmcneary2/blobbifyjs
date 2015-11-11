@@ -5,8 +5,9 @@
   "main": "./src/index.js",
   "scripts": {
     "predocs": "rm -rf ./docs",
-    "docs": "jsdoc . -c jsdoc.json -d docs -p -r",
-    "test": "mocha ./test/blobbify -R progress"
+    "docs": "jsdoc . -c jsdoc.json -d docs -p -r -R README.md",
+    "prelint": "rm -rf ./docs",
+    "lint": "jshint . --exclude **/node_modules"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "atob": "^1.1.2",
     "chai": "^3.4.1",
     "jsdoc": "^3.3.3",
+    "jshint": "^2.8.0",
     "mocha": "^2.3.3",
     "rimraf": "^2.4.3"
   }
