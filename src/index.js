@@ -45,7 +45,7 @@ Blobbify.prototype.addBase64String = function (index, str) {
         throw 'The provided index already exists in the items that will make up the contents of the Blob.';
     }
 
-    var arrays = base64StringToUintArrays(str);
+    var arrays = base64StringToUintArrays(this, str);
     var chunk = combineArrays(arrays);
     addChunk(this, index, chunk);
 };
@@ -55,7 +55,7 @@ Blobbify.prototype.addBase64String = function (index, str) {
  * @param {string} str A Base64 encoded string of data.
  */
 Blobbify.prototype.appendBase64String = function (str) {
-    var arrays = base64StringToUintArrays(str);
+    var arrays = base64StringToUintArrays(this, str);
     var chunk = combineArrays(arrays);
     appendChunk(this, chunk);
 };
@@ -101,16 +101,16 @@ function appendChunk(blobby, chunk) {
     blobby._nextChunkIndex++;
 }
 
-function base64StringToUintArrays(str) {
+function base64StringToUintArrays(blobby, str) {
     if (typeof str !== 'string' || str === null) {
         throw 'str must be a Base64 encoded string that is not null.';
     }
 
     var arr = [];
     var chars = atob(str);
-    for (var offset = 0; offset < chars.length; offset += this.base64BufferLength) {
+    for (var offset = 0; offset < chars.length; offset += blobby.base64BufferLength) {
         var remaining = chars.length - offset;
-        var charCodesLength = remaining < this.base64BufferLength ? remaining : this.base64BufferLength;
+        var charCodesLength = remaining < blobby.base64BufferLength ? remaining : blobby.base64BufferLength;
         var charCodes = new Array(charCodesLength);
         for (var i = 0; i < charCodesLength; i++) {
             charCodes[i] = chars.charCodeAt(offset + i);
