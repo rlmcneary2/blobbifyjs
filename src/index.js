@@ -61,6 +61,14 @@ Blobbify.prototype.appendBase64String = function (str) {
 };
 
 /**
+ * Append a Base64 encoded string to the Blob contents. The Blob will be created with contents in the order that the string was appended. 
+ * @param {string} blob A Blob instance.
+ */
+Blobbify.prototype.appendBlob = function (blob) {
+    appendChunk(this, blob);
+};
+
+/**
  * Returns the contents as a Blob.
  * @returns {Blob} The Blob that represents the current contents.
  */
